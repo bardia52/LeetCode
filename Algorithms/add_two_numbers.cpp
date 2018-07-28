@@ -9,43 +9,33 @@
 class Solution {
 public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-        //cout << "l1=" << listNodeToString(l1) << " l2=" << listNodeToString(l2) << endl;
-        int num1 = list2int(l1);
-        int num2 = list2int(l2);
-        cout << "num1=" << num1 << " num2=" << num2 << endl;
-        int sum = num1 + num2;
-        ListNode* sumNode = int2list(sum);
-        return sumNode;
-    }
-private:
-    int list2int(ListNode* node) {
-        int result = 0;
-        if (node == nullptr) {
-        }
-        else {
-            int order = 1;
-            while (node) {
-                result += (node->val * order);
-                order *= 10;
-                cout << "result=" << result << endl;
-                node = node->next;
-            }
-        }
-        return result;
-    }
-
-    ListNode* int2list(int num) {
-        int numTemp = num;
         ListNode* dummyRoot = new ListNode(0);
-        ListNode* ptr = dummyRoot;
-        do {
-            int rightDigit = numTemp % 10;
-            numTemp /= 10;
-            ptr->next = new ListNode(rightDigit);
-            ptr = ptr->next;
-        } while(numTemp);
-        ptr = dummyRoot->next;
+        ListNode* lSum = dummyRoot;
+        int flag = 0;
+        while (l1 || l2) {
+            int val1 = l1 ? l1->val : 0;
+            int val2 = l2 ? l2->val : 0;
+            int midVal = val1 + val2 + flag;
+            int digit = 0;
+            if (midVal >= 10) {
+                flag = 1;
+                digit = midVal - 10;
+            }
+            else {
+                flag = 0;
+                digit = midVal;
+            }
+            lSum->next = new ListNode(digit);
+            if (l1)
+                l1 = l1->next;
+            if (l2)
+                l2 = l2->next;
+            lSum = lSum->next;
+        }
+        if (flag)
+            lSum->next = new ListNode(1);
+        lSum = dummyRoot->next;
         delete dummyRoot;
-        return ptr;
+        return lSum;
     }
 };
