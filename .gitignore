@@ -31,3 +31,7 @@
 *.out
 *.app
 leetcode-solutions-.pdf
+
+# Workspace folders
+/Eclipse_Workspace/
+/Eclipse_Workspace_cpp/
