@@ -38,6 +38,6 @@ leetcode-solutions-.pdf
 
 # Workspace folders
 /Eclipse_Workspace/
-/Eclipse_Workspace_cpp/.metadata/
+/Eclipse_Workspace_cpp/
 *.xml
 *.prefs
