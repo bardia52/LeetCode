@@ -32,6 +32,12 @@
 *.app
 leetcode-solutions-.pdf
 
+# project files
+*.project
+*.cproject
+
 # Workspace folders
 /Eclipse_Workspace/
-/Eclipse_Workspace_cpp/
+/Eclipse_Workspace_cpp/.metadata/
+*.xml
+*.prefs

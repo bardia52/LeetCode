@@ -9,7 +9,7 @@ public:
         int len = s.length();
         string result(len, '*');
         for (int i = 0; i <= len; i++) {
-        	result[i] = s[len-i-1];
+            result[i] = s[len-i-1];
         }
         return result;
     }
