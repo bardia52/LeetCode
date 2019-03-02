@@ -5,13 +5,14 @@ class Solution(object):
         :type k: int
         :rtype: int
         """
-        maxLen = min(len(s),k)
-        for m in range(len(s)):
-            # start of string is s[m]
-            for n in range(m+1,len(s)+1):
-                tempLen = len(''.join(set(s[m:n])))
-                if tempLen > k:
-                    break
-                elif n-m > maxLen:
-                    maxLen = n-m
-        return maxLen
+        d = {}
+        ans = 0
+        low = 0
+        for i, c in enumerate(s):
+            d[c] = i
+            if len(d) > k:
+                j = min(d.values())
+                del d[s[j]]
+                low = j + 1
+            ans = max(ans, i-low+1)
+        return ans
