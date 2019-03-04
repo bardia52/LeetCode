@@ -6,6 +6,20 @@ class Solution(object):
         :type queries: List[List[str]]
         :rtype: List[float]
         """
+        def DFS(graph, nodes, a, b, value):
+            gDim = len(nodes)
+            print nodes, a, b
+            aInx = nodes.index(a)
+            bInx = nodes.index(b)
+            if graph[aInx][bInx] !=0 or graph[aInx][bInx] !=0:
+                print a, b, value
+                return value * graph[aInx][bInx]
+
+            for col in range(gDim):
+                if graph[aInx][col] != 0 or graph[col][aInx] != 0:
+                    print "aInx=", aInx, "col=", col, nodes[col], b, value, graph[aInx][col]
+                    return value*DFS(graph, nodes, nodes[col], b, graph[aInx][col])
+
         # Get list of available nodes from equations
         nodes = []
         for eq in equations:
@@ -31,5 +45,8 @@ class Solution(object):
         ans = []
         for que in queries:
             if que[0] not in nodes or que[1] not in nodes:
-                ans.append(-1)
-            
+                ans.append(-1.0)
+            else:
+                ret = DFS(graph, nodes, que[0], que[1], 1.0)
+                ans.append(ret)
+        return ans
