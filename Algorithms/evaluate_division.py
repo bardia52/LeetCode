@@ -50,3 +50,7 @@ class Solution(object):
                 ret = DFS(graph, nodes, que[0], que[1], 1.0)
                 ans.append(ret)
         return ans
+
+[["x1","x2"],["x2","x3"],["x3","x4"],["x4","x5"]]
+[3.0,4.0,5.0,6.0]
+[["x1","x5"],["x5","x2"],["x2","x4"],["x2","x2"],["x2","x9"],["x9","x9"]]
