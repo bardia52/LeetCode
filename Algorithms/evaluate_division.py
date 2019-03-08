@@ -8,16 +8,16 @@ class Solution(object):
         """
         def DFS(graph, nodes, a, b, value):
             gDim = len(nodes)
-            print nodes, a, b
+            #print nodes, a, b
             aInx = nodes.index(a)
             bInx = nodes.index(b)
             if graph[aInx][bInx] !=0 or graph[aInx][bInx] !=0:
-                print a, b, value
+                #print a, b, value
                 return value * graph[aInx][bInx]
 
             for col in range(gDim):
                 if graph[aInx][col] != 0 or graph[col][aInx] != 0:
-                    print "aInx=", aInx, "col=", col, nodes[col], b, value, graph[aInx][col]
+                    #print "aInx=", aInx, "col=", col, nodes[col], b, value, graph[aInx][col]
                     return value*DFS(graph, nodes, nodes[col], b, graph[aInx][col])
 
         # Get list of available nodes from equations
@@ -27,7 +27,7 @@ class Solution(object):
                 nodes.append(eq[0])
             if eq[1] not in nodes:
                 nodes.append(eq[1])
-        print nodes
+        #print nodes
 
         # Populate graph from equations and values
         numNodes = len(nodes)
@@ -39,7 +39,7 @@ class Solution(object):
             inx2 = nodes.index(eq[1])
             graph[inx1][inx2] = values[inx]
             graph[inx2][inx1] = 1.0 / values[inx]
-        print graph
+        #print graph
 
         # Search for solutions in queries using DFS
         ans = []
