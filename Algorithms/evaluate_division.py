@@ -6,19 +6,25 @@ class Solution(object):
         :type queries: List[List[str]]
         :rtype: List[float]
         """
-        def DFS(graph, nodes, a, b, value):
+        def DFS(graph, visited, nodes, a, b, value):
             gDim = len(nodes)
             print nodes, a, b
             aInx = nodes.index(a)
             bInx = nodes.index(b)
+            visited[aInx][bInx] = True
+            print "visited", [aInx], [bInx], "=", visited[aInx][bInx]
+            print visited
             if graph[aInx][bInx] !=0 or graph[aInx][bInx] !=0:
-                print a, b, value
+                #print a, b, value
                 return value * graph[aInx][bInx]
 
             for col in range(gDim):
-                if graph[aInx][col] != 0 or graph[col][aInx] != 0:
-                    print "aInx=", aInx, "col=", col, nodes[col], b, value, graph[aInx][col]
-                    return value*DFS(graph, nodes, nodes[col], b, graph[aInx][col])
+                if graph[aInx][col] != 0 and not visited[aInx][col]:
+                    #print "DFS a=", nodes[col], "b=", b
+                    #print "aInx=", aInx, "col=", col, nodes[col], "b=", b, "value=", value, graph[aInx][col], "visited", [aInx], [col], "=", visited[aInx][col]
+                    print "Visiting ", aInx, col, ", because visited",aInx,col,"=",visited[aInx][col]
+                    return value*DFS(graph, visited, nodes, nodes[col], b, graph[aInx][col])
+            return -1
 
         # Get list of available nodes from equations
         nodes = []
@@ -32,6 +38,7 @@ class Solution(object):
         # Populate graph from equations and values
         numNodes = len(nodes)
         graph = [[0] * numNodes for i in range(numNodes)]
+        visited = [[False] * numNodes for i in range(numNodes)]
         numEq = len(equations)
         for inx in range(numEq):
             eq = equations[inx]
@@ -47,7 +54,7 @@ class Solution(object):
             if que[0] not in nodes or que[1] not in nodes:
                 ans.append(-1.0)
             else:
-                ret = DFS(graph, nodes, que[0], que[1], 1.0)
+                ret = DFS(graph, visited, nodes, que[0], que[1], 1.0)
                 ans.append(ret)
         return ans
 
