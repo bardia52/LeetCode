@@ -26,6 +26,5 @@ class MovingAverage(object):
         if not self.sizeMet:
             self.ave = float(sum(self.array[0:self.pointer])) / float(self.pointer)
         else:
-            self.ave += (float(val-oldVal) / float(self.size))
             self.ave = float(sum(self.array)) / float(self.size)
         return self.ave
