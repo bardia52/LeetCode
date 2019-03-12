@@ -16,8 +16,6 @@ class MovingAverage(object):
         :type val: int
         :rtype: float
         """
-        # print self.pointer, self.array
-        oldVal = self.array[self.pointer]
         self.array[self.pointer] = val
         self.pointer += 1
         if self.pointer == self.size:
